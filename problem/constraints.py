@@ -142,6 +142,13 @@ class MagicSeries(Constraint):
 		# dont test if not all vars assigned 
 		# return True / False
 
+		variables = self.variables
+		if(len(values) == len(variables)):
+			counts = [values.count(var) for var in variables]
+			if(counts == values):
+				return True	
+			else:
+				return False
 ### Knapsack Constraints ###
 
 class KnapsackCapacity(Constraint):
