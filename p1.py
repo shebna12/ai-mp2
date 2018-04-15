@@ -9,17 +9,17 @@ from utils import *
 
 
 def test1():
-    problem_name = 'plants'
+    # problem_name = 'plants'
     # problem_name = 'magic_square'
     # problem_name = 'magic_series'
     # problem_name = 'knapsack'
-    # problem_name = 'vertex_cover'
+    problem_name = 'vertex_cover'
 
-    solver_name = 'brute_force'
-    # solver_name = 'backtracking'
+    # solver_name = 'brute_force'
+    solver_name = 'backtracking'
 
-    solution_limit = 0
-    # solution_limit = 1
+    # solution_limit = 0
+    solution_limit = 1
 
     problem = select_problem(problem_name)
 
@@ -43,9 +43,9 @@ def test1():
     print('%s \t %s \t limit = %d' % (problem_name,solver_name,solution_limit))
 
 def test2():
-    problem_name = 'plants'
+    # problem_name = 'plants'
     # problem_name = 'einstein'
-    # problem_name = 'magic_square'
+    problem_name = 'magic_square'
     # problem_name = 'magic_series'
     # problem_name = 'knapsack'
     # problem_name = 'vertex_cover'
@@ -53,7 +53,7 @@ def test2():
     option = 'with_filtering'
     # option = 'no_filtering'
 
-    solution_limit = 0
+    solution_limit = 1
     # solution_limit = 1
 
     problem = select_problem(problem_name)
@@ -94,7 +94,7 @@ def test3():
     config.solution_limit = solution_limit
     config.max_iterations = 999999
     config.explain = False
-
+    
     config.select_variable_fn = custom_variable_selector
     config.sort_values_fn = custom_value_ordering
     config.filter_fn = forward_checking
@@ -126,7 +126,7 @@ if __name__ == '__main__':
     import time
     start = time.time()
 
-    test = 1
+    test = 3
 
     if test == 1:
         test1()
