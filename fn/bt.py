@@ -19,7 +19,7 @@ def random_unassigned(state):
 def custom_variable_selector(state):
 	problem = state.problem
 	solution = state.solution
-	domain = state.domain 
+	domain = state.domain  #remaining values
 
 	# INSERT CODE HERE
 	# Write your variable ordering code here 
@@ -29,6 +29,33 @@ def custom_variable_selector(state):
 	# Heuristic 1: minimum remaining values = select variables with fewer values left in domain
 	# Heuristic 2: degree heuristic = select variables related to more constraints
 	# Can use just one heuristic, or chain together heuristics (tie-break)
+
+
+	#----------USING MRV HEURISTIC-------------
+	unassigned_vars = problem.unassigned_variables(solution)
+	min_var = unassigned_vars[0]
+
+	#get number of constraints of each unassigned var
+	for var in unassigned_vars:
+		#number of remaining values for domain and min
+		num_remaining_dom = len(domain[var])
+		num_remaining_min = len(domain[min_var])
+
+		#for checking. can be omitted soon.
+		# print("DOM-remaining for ", var, ":", num_remaining_dom)
+		# print("DOM-remaining for min var", var, ":", num_remaining_min)
+
+		if num_remaining_dom < num_remaining_min:
+			min_var = var
+
+		elif num_remaining_dom == num_remaining_min:
+			#if domain and min have same number of remaining values
+			if len(var) > len(min_var):
+				#Select variable with max constraints
+				min_var = var
+
+	return min_var
+
 
 ### VALUE ORDERING FUNCTIONS ###
 
@@ -54,12 +81,15 @@ def custom_value_ordering(state,variable):
 	# INSERT CODE HERE
 	# Write your value ordering code here 
 	# Return sorted values, accdg. to some heuristic
+	return random_order(state, variable)
 
 	# Suggestions:
 	# Heuristic: least constraining value (LCV)
 	# LCV = prioritize values that filter out fewer values in other variables' domains
 	# Hint: you will use state.copy() for new_state, use new_state.assign, and use forward_checking() on new_state
 	# Count the number of filtered values by comparing the total from current state and new_state
+
+
 
 ### FILTERING FUNCTIONS ###
 
