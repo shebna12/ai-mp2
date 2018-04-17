@@ -25,7 +25,9 @@ def change_upto_two_values(state):
 	solution = state.solution
 
 	neighbors = change_one_value(state)
-
+	print("variables: ", problem.variables)
+	# print(itertools.product(problem.variables, 2))
+	# print(list(itertools.product(problem.variables, 2)))
 	# INSERT CODE HERE
 	# could change one value or two values
 	# Hints for changing 2 values: 
