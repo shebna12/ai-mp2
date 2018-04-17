@@ -10,7 +10,7 @@ def test1():
     # See check/p0.1.txt for correct answer
 
 def test2():
-    problem = magic_square.problem(N=3)
+    problem = magic_square.problem(N=5)
     problem.display()
 
     solver = brute_force_solver(problem)
@@ -45,7 +45,7 @@ def test4():
     # See check/p0.4.txt for correct answer
 
 def test5():
-    problem = vertex_cover.problem(test_case=2) # 0,1,2,3,4,5
+    problem = vertex_cover.problem(test_case=4) # 0,1,2,3,4,5
     problem.display()
 
     solver = brute_force_solver(problem)
@@ -60,7 +60,7 @@ def test5():
 def test6():
     problem_name = 'plants'     
     # problem_name = 'magic_square'
-    option = 'combination'   
+    option = 'combination'
     # option = 'permutation'   
 
     if problem_name == 'plants':

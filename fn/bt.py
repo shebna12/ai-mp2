@@ -24,20 +24,28 @@ def custom_variable_selector(state):
 	# INSERT CODE HERE
 	# Write your variable ordering code here 
 	# Return an unassigned variable 
+	
+	# domain_len = [len(domain[key]) for key in domain.keys()]
+	# min_len = min(domain_len)
+	# possible_vars = [key for key in domain.keys() if len(domain[key]) == min_len]
+	# print(possible_vars)
+
+	# if len(possible_vars) >= 1:
+	# 	const_counter = {}
+	# 	for item in possible_vars:
+	# 		const_counter.setdefault(item, 0)
+	# 	for constraint in problem.constraints:
+	# 		for key in const_counter.keys():
+	# 			if key in constraint.variables:
+	# 				const_counter[key] += 1
+	# 	max_value = max(const_counter.values())
+	# 	[key for key in const_counter.keys() if ]
+	# return random_unassigned(state)
 
 	# Suggestions: 
 	# Heuristic 1: minimum remaining values = select variables with fewer values left in domain
-	# Heuristic 2: degree heuristic = select variables related to more constraints
-	# Can use just one heuristic, or chain together heuristics (tie-break)
+	# Heuristic 2: degree h 	
 
-
-	#----------USING MRV HEURISTIC-------------
-	unassigned_vars = problem.unassigned_variables(solution)
-	min_var = unassigned_vars[0]
-	
-	for var in unassigned_vars:
-
-		#number of remaining values for domain and min
 		num_remaining_dom = len(domain[var])
 		num_remaining_min = len(domain[min_var])
 
@@ -80,7 +88,7 @@ def random_order(state,variable):
 def custom_value_ordering(state,variable):
 	problem = state.problem
 	domain = state.domain[variable]
-
+	
 	# INSERT CODE HERE
 	# Write your value ordering code here 
 	# Return sorted values, accdg. to some heuristic
