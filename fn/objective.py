@@ -41,6 +41,15 @@ def knapsack_objective(state):
 	problem = state.problem
 	solution = state.solution
 
+	if problem.find_hard_violation(solution):
+		return 0
+
+	total_value = 0
+	for var in problem.variables:
+		if (solution[var]):
+			value = var.value
+			total_value += value
+	return total_value
 	# INSERT CODE HERE
 	# If solution violates hard constraint, score should be 0 (invalid) -- worst score for max
 	# Hint: use problem.find_hard_violation
@@ -56,3 +65,10 @@ def vertex_cover_objective(state):
 	# If solution violates hard constraint, score should be infinity (invalid) -- worst score for min
 	# Hint: use problem.find_hard_violation
 	# Count vertices included in the solution
+	if problem.find_hard_violation(solution):
+		return float('inf')
+
+	count = 0
+	for var in problem.variables:
+		count += solution[var] # 0 or 1
+	return count
