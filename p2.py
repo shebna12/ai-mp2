@@ -20,8 +20,8 @@ def test1():
     problem = plants.problem()
     config = common_config()
 
-    # neighborhood_name = 'change2'
-    neighborhood_name = 'swap2'
+    neighborhood_name = 'change2'
+    # neighborhood_name = 'swap2'
 
     if neighborhood_name == 'change2':
         config.neighborhood_fn = change_upto_two_values
@@ -49,11 +49,11 @@ def test2():
     # problem_name = 'magic_square'
     # problem_name = 'magic_series'
 
-    neighborhood_name = 'change1'
+    # neighborhood_name = 'change1'
     # neighborhood_name = 'change2'
     # neighborhood_name = 'swap2'
     # neighborhood_name = 'min_conflict'
-    # neighborhood_name = 'max_min_conflict'
+    neighborhood_name = 'max_min_conflict'
 
     config = common_config()
     config.objective_fn = count_violations
@@ -83,8 +83,8 @@ def test2():
     display_solutions(problem,solver)
 
 def test3():
-    problem_name = 'knapsack'
-    # problem_name = 'vertex_cover'
+    # problem_name = 'knapsack'
+    problem_name = 'vertex_cover'
 
     neighborhood_name = 'change1'
     # neighborhood_name = 'change2'
@@ -261,7 +261,7 @@ if __name__ == '__main__':
     import time
     start = time.time()
 
-    test = 1
+    test = 3
 
     if test == 1:
         test1()

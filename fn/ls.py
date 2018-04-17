@@ -39,7 +39,7 @@ def change_upto_two_values(state):
 			neighbor.solution[var1] = value1
 			neighbor.solution[var2] = value2
 			neighbor.changes = [(var1, value1), (var2, value2)]
-			neighbor.append(neighbor)
+			neighbors.append(neighbor)
 
 	return neighbors
 	# INSERT CODE HERE
