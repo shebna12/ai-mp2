@@ -22,9 +22,9 @@ def custom_variable_selector(state):
 	domain = state.domain  #remaining values
 
 	# INSERT CODE HERE
-	# Write your variable ordering code here 
+	# Write your variable selection code here 
 	# Return an unassigned variable 
-	
+
 	# domain_len = [len(domain[key]) for key in domain.keys()]
 	# min_len = min(domain_len)
 	# possible_vars = [key for key in domain.keys() if len(domain[key]) == min_len]
@@ -46,26 +46,45 @@ def custom_variable_selector(state):
 	# Heuristic 1: minimum remaining values = select variables with fewer values left in domain
 	# Heuristic 2: degree h 	
 
+	unassigned_vars = problem.unassigned_variables(solution)
+	min_var = unassigned_vars[0]
+
+	#get number of constraints of each unassigned var
+	num_constraints = get_num_constraints(state, unassigned_vars)
+	
+	for var in unassigned_vars:
+		#num of remaining values for var and min
 		num_remaining_dom = len(domain[var])
 		num_remaining_min = len(domain[min_var])
-
-		#get number of constraints of each unassigned var
-		num_constraints = forward_checking(state,var)
-		print("VAR ", var, ":", state)
 
 		if num_remaining_dom < num_remaining_min:
 			min_var = var
 
 		elif num_remaining_dom == num_remaining_min:
 			# if domain and min have same number of remaining values
-			try:
-				if num_constraints >= forward_checking(state, min_var):
-					#Select variable with max constraints
-					min_var = var
-			except:
-					print("NONE")
+			if num_constraints[var] >= num_constraints[min_var]:
+				#Select variable with max constraints
+				min_var = var
 
 	return min_var
+
+def get_num_constraints(state, unassigned_vars):
+	problem = state.problem
+
+	const_counter = {}
+	for var in unassigned_vars:
+		count = 0
+
+		for constraint in problem.constraints:
+			# print("constraint: ", constraint)
+			for key in constraint.variables:
+				# print("key: ", key, " vs ", var)
+				if (key != var) and key in unassigned_vars:
+					count += 1
+
+				const_counter[key] = count
+	return const_counter
+
 
 
 ### VALUE ORDERING FUNCTIONS ###
