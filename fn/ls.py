@@ -24,6 +24,24 @@ def change_upto_two_values(state):
 	problem = state.problem
 	solution = state.solution
 
+	neighbors = change_one_value(state)
+	# neighbor_prod = list(itertools.product(problem.variables, problem.variables))
+	neighbor_comb = list(itertools.combinations(problem.domain, 2))
+	for item in neighbor_comb:
+		var1, var2 = item
+		domain1 = problem.domain[var1]
+		domain2 = problem.domain[var2]
+		for value in list(itertools.product(domain1, domain2)):
+			value1, value2 = value
+			if value1 == solution[var1] and value2 == solution[var2]:
+				continue
+			neighbor = state.copy()
+			neighbor.solution[var1] = value1
+			neighbor.solution[var2] = value2
+			neighbor.changes = [(var1, value1), (var2, value2)]
+			neighbor.append(neighbor)
+
+	return neighbors
 	# INSERT CODE HERE
 	# could change one value or two values
 	# Hints for changing 2 values: 
@@ -35,6 +53,28 @@ def change_upto_two_values(state):
 def swap_two_values(state):
 	problem = state.problem
 	solution = state.solution
+
+	neighbors = []
+
+	neighbor_comb = list(itertools.combinations(problem.domain, 2))
+	for item in neighbor_comb:
+		var1, var2 = item
+		value2 = solution[var1]
+		value1 = solution[var2]
+		# temp = solution[var1]
+		# solution[var1] = solution[var2]
+		# solution[var2] = temp
+		# print(solution[var1], "\t", solution[var2])
+		if value1 == solution[var1] and value2 == solution[var2]:
+			continue
+
+		neighbor = state.copy()
+		neighbor.solution[var1] = value1
+		neighbor.solution[var2] = value2
+		neighbor.changes = [(var1, value1), (var2, value2)]
+		neighbors.append(neighbor)
+
+	return neighbors
 	
 	# INSERT CODE HERE
 	# Hints: 
