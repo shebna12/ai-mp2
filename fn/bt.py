@@ -25,33 +25,12 @@ def custom_variable_selector(state):
 	# Write your variable selection code here 
 	# Return an unassigned variable 
 
-	# domain_len = [len(domain[key]) for key in domain.keys()]
-	# min_len = min(domain_len)
-	# possible_vars = [key for key in domain.keys() if len(domain[key]) == min_len]
-	# print(possible_vars)
-
-	# if len(possible_vars) >= 1:
-	# 	const_counter = {}
-	# 	for item in possible_vars:
-	# 		const_counter.setdefault(item, 0)
-	# 	for constraint in problem.constraints:
-	# 		for key in const_counter.keys():
-	# 			if key in constraint.variables:
-	# 				const_counter[key] += 1
-	# 	max_value = max(const_counter.values())
-	# 	[key for key in const_counter.keys() if ]
-	# return random_unassigned(state)
-
-	# Suggestions: 
-	# Heuristic 1: minimum remaining values = select variables with fewer values left in domain
-	# Heuristic 2: degree h 	
-
 	unassigned_vars = problem.unassigned_variables(solution)
 	min_var = unassigned_vars[0]
 
 	#get number of constraints of each unassigned var
 	num_constraints = get_num_constraints(state, unassigned_vars)
-	
+
 	for var in unassigned_vars:
 		#num of remaining values for var and min
 		num_remaining_dom = len(domain[var])
@@ -70,19 +49,17 @@ def custom_variable_selector(state):
 
 def get_num_constraints(state, unassigned_vars):
 	problem = state.problem
-
 	const_counter = {}
+
 	for var in unassigned_vars:
 		count = 0
 
 		for constraint in problem.constraints:
-			# print("constraint: ", constraint)
 			for key in constraint.variables:
-				# print("key: ", key, " vs ", var)
 				if (key != var) and key in unassigned_vars:
 					count += 1
-
 				const_counter[key] = count
+
 	return const_counter
 
 
