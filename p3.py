@@ -23,8 +23,8 @@ def test1():
     config = common_config()
     problem = select_problem('maxone',config)
 
-    generator_name = 'change2'
-    # generator_name = 'swap2'
+    # generator_name = 'change2'
+    generator_name = 'swap2'
 
     if generator_name == 'change2':
         config.neighbor_generator = change_upto_two_values_generator

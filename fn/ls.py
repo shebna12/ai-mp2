@@ -128,6 +128,19 @@ def swap_two_values_generator(state):
 	problem = state.problem
 	solution = state.solution
 
+	while True:
+		var1 = random.choice(problem.variables)
+		var2 = random.choice(problem.variables)
+
+		value1 = solution[var2]
+		value2 = solution[var1]
+
+		neighbor = state.copy()
+		neighbor.solution[var1] = value1
+		neighbor.solution[var2] = value2
+		neighbor.changes = [(var1, value1), (var2, value2)]
+		yield neighbor
+
 	# INSERT CODE HERE
 	# Hints: 
 	# Randomly select variables to swap
