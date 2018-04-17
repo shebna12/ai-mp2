@@ -34,7 +34,6 @@ class BinaryConstraint(Constraint):
 			return True
 
 ### Global Constraints ###
-
 class AllDifferent(Constraint):
 	def test(self,solution):
 		values = self.get_assigned_values(solution)
