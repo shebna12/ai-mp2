@@ -33,7 +33,7 @@ def change_upto_two_values(state):
 		domain2 = problem.domain[var2]
 		for value in list(itertools.product(domain1, domain2)):
 			value1, value2 = value
-			if value1 == solution[var1] or value2 == solution[var2]:
+			if value1 == solution[var1] and value2 == solution[var2]:
 				continue
 			neighbor = state.copy()
 			neighbor.solution[var1] = value1
