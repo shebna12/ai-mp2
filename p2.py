@@ -20,8 +20,8 @@ def test1():
     problem = plants.problem()
     config = common_config()
 
-    neighborhood_name = 'change2'
-    # neighborhood_name = 'swap2'
+    # neighborhood_name = 'change2'
+    neighborhood_name = 'swap2'
 
     if neighborhood_name == 'change2':
         config.neighborhood_fn = change_upto_two_values
