@@ -43,10 +43,12 @@ def vertex_cover_neighbor_generator(state):
     problem = state.problem
     solution = state.solution
     constraint = problem.constraints[0]
+    # print(constraint.test(solution))
 
     while True:
-        neighbor = state.copy()
+    
 
+        neighbor = state.copy()
         # INSERT CODE HERE
         # Idea: If all edges not yet covered, neighbor = add a random vertex to current solution (try to add more edges covered)
         #       If all edges already covered, neighbor = remove a random vertex from current solution (try to minimize no. of vertex used)
@@ -54,3 +56,23 @@ def vertex_cover_neighbor_generator(state):
         # Hint: check the pattern of maxone_neigbor_generator
         # Dont forget to update neighbor.changes
         # yield neighbor
+        new_value = 1
+        if constraint.test(solution):
+            new_value = 0
+            while True:
+                var = random.choice(problem.variables)
+                value = solution[var]
+                if value:
+                    break
+        else:
+            while True:
+                var = random.choice(problem.variables)
+                value = solution[var]
+                if not value:
+                    break
+        
+        # print(constraint.test(solution), var, new_value)
+        neighbor.solution[var] = new_value
+        neighbor.changes = [(var, new_value)]
+
+        yield neighbor

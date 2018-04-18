@@ -37,8 +37,8 @@ def test1():
     # See check/p3.1.txt for correct answer
 
 def test2():
-    problem_name = 'knapsack'
-    # problem_name = 'vertex_cover'
+    # problem_name = 'knapsack'
+    problem_name = 'vertex_cover'
 
     config = common_config()
     problem = select_problem(problem_name,config)
@@ -166,7 +166,7 @@ if __name__ == '__main__':
     import time
     start = time.time()
 
-    test = 1
+    test = 2
 
     if test == 1:
         test1()
