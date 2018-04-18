@@ -45,14 +45,13 @@ def knapsack_neighbor_generator(state):
                     break
             neighbor.solution[var] = new_value
             neighbor.changes = [(var, new_value)]
-        else:
-            var1 = random.choice(problem.variables)
-            var2 = random.choice(problem.variables)
-            
+        else:            
             while True:
+                var1 = random.choice(problem.variables)
+                var2 = random.choice(problem.variables)
                 value1 = random.choice(problem.domain[var1])
                 value2 = random.choice(problem.domain[var2])
-                if ((value1 != solution[var1]) and (value2 != solution[var2])) or (value1 == solution[var2] and value2 == solution[var1]):
+                if not ((value1 == solution[var1] and value2 == solution[var2]) and (value1 == solution[var2] and value2 == solution[var1])):
                     break
             
             neighbor.solution[var1] = value1
