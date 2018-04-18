@@ -1,7 +1,6 @@
 import random
 
 
-
 def first_unassigned(state):
 	problem = state.problem
 	solution = state.solution
@@ -81,7 +80,7 @@ def custom_value_ordering(state,variable):
 	problem = state.problem
 	domain = state.domain[variable]
 
-	return random_order(state,variable)
+	# return default_order(state,variable)
 	# INSERT CODE HERE
 	# Write your value ordering code here 
 	# Return sorted values, accdg. to some heuristic
