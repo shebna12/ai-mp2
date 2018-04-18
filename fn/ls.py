@@ -100,6 +100,12 @@ def change_upto_two_values_generator(state):
 	problem = state.problem
 	solution = state.solution
 
+	# INSERT CODE HERE
+	# Hints: 
+	# Randomly select variables & values
+	# update neighbor.changes 
+	# yield neighbor
+
 	while True:
 		var1 = random.choice(problem.variables)
 		var2 = random.choice(problem.variables)
@@ -113,33 +119,15 @@ def change_upto_two_values_generator(state):
 		neighbor.changes = [(var1, value1), (var2, value2)]
 		yield neighbor
 
-
-
-	# INSERT CODE HERE
-	# Hints: 
-	# Randomly select variables & values
-	# update neighbor.changes 
-	# yield neighbor
-	var_combinations = list(itertools.combinations(problem.variables, 2))
-	while True:
-		item = random.choice(var_combinations)
-		var1, var2 = item
-		domain1 = problem.domain[var1]
-		domain2 = problem.domain[var2]
-		dom_product = list(itertools.product(domain1, domain2))
-		value = random.choice(dom_product)
-		val1, val2 = value
-		if val1 == solution[var1] and val2 == solution[var2]:
-			continue
-		neighbor = state.copy()
-		neighbor.solution[var1] = val1
-		neighbor.solution[var2] = val2
-		neighbor.changes = [(var1, val1), (var2, val2)]
-		yield neighbor
-
 def swap_two_values_generator(state):
 	problem = state.problem
 	solution = state.solution
+
+	# INSERT CODE HERE
+	# Hints: 
+	# Randomly select variables to swap
+	# update neighbor.changes 
+	# yield neighbor
 
 	while True:
 		var1 = random.choice(problem.variables)
@@ -147,26 +135,6 @@ def swap_two_values_generator(state):
 
 		value1 = solution[var2]
 		value2 = solution[var1]
-
-		neighbor = state.copy()
-		neighbor.solution[var1] = value1
-		neighbor.solution[var2] = value2
-		neighbor.changes = [(var1, value1), (var2, value2)]
-		yield neighbor
-
-	# INSERT CODE HERE
-	# Hints: 
-	# Randomly select variables to swap
-	# update neighbor.changes 
-	# yield neighbor
-	var_combinations = list(itertools.combinations(problem.variables, 2))
-	while True:
-		item = random.choice(var_combinations)
-		var1, var2 = item
-		value2 = solution[var1]
-		value1 = solution[var2]
-		if value1 == solution[var1] and value2 == solution[var2]:
-			continue
 
 		neighbor = state.copy()
 		neighbor.solution[var1] = value1
