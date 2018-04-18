@@ -36,7 +36,29 @@ def knapsack_neighbor_generator(state):
         # Hint: use constraint.test(solution)
         # Hint: check the pattern of maxone_neigbor_generator
         # Dont forget to update neighbor.changes
-        # yield neighbor
+        if constraint.test(solution):
+            new_value = 0
+            while True:
+                var = random.choice(problem.variables)
+                value = solution[var]
+                if value:
+                    break
+            neighbor.solution[var] = new_value
+            neighbor.changes = [(var, new_value)]
+        else:
+            var1 = random.choice(problem.variables)
+            var2 = random.choice(problem.variables)
+            
+            while True:
+                value1 = random.choice(problem.domain[var1])
+                value2 = random.choice(problem.domain[var2])
+                if ((value1 != solution[var1]) and (value2 != solution[var2])) or (value1 == solution[var2] and value2 == solution[var1]):
+                    break
+            
+            neighbor.solution[var1] = value1
+            neighbor.solution[var2] = value2
+            neighbor.changes = [(var1, value1), (var2, value2)]
+        yield neighbor
         
 
 def vertex_cover_neighbor_generator(state):
