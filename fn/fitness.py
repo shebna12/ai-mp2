@@ -55,7 +55,7 @@ def vertex_cover_fitness(state,feasibility_minimum):
 	problem = state.problem
 	solution = state.solution
 
-	if problem.find_hard_violation(solution) is not None: 
+	if problem.find_hard_violation(solution) is not None:  
 		# has violation: some edges are not covered
 		max_score = int(feasibility_minimum * 0.75)
 		used_vertices = [v for v in problem.variables if solution[v] == 1]
@@ -66,22 +66,16 @@ def vertex_cover_fitness(state,feasibility_minimum):
 		# Hint: use problem.edges, used_vertices
 
 		problem_edges_length = len(problem.edges)
-		covered_edges = 0
+		uncovered_edges = 0
 
 		# Check if that edge contains a vertex from the used_vertices
 		for edge in problem.edges:
-			if (edge[0] in used_vertices or edge[1] in used_vertices):
-				covered_edges = covered_edges + 1
+			if not (edge[0] in used_vertices or edge[1] in used_vertices):
+				uncovered_edges = uncovered_edges + 1
 
-		score = (covered_edges/problem_edges_length)*100
-
-		# If the score is beyond the max_score, lower it down to the max score level
-		if(score > max_score):
-			score = max_score
 		
-		# print("Score: ",score)
-
-
+		score = max_score - uncovered_edges
+		return score
 
 
 	else:	
@@ -99,14 +93,12 @@ def vertex_cover_fitness(state,feasibility_minimum):
 		used_vertices_length = len(used_vertices_length)
 		problem_vertices_length = len(problem.variables)
 		unused_vertices_length = problem_vertices_length - used_vertices_length
-		computed_score = (unused_vertices_length/problem_vertices_length) * 100
+		
 
 		# If the computed score is less than the assumed min score, return the computed score 
-		if(computed_score < score):
-			score = computed_score
 		
-		# print("Purrfect score:", score)
-
+		score = feasibility_minimum + unused_vertices_length
+		
 
 	return score
 			
