@@ -22,17 +22,19 @@ def knapsack_fitness(state,feasibility_minimum):
 		# Idea: less excess weight = higher score
 		# Hint: use item.weight, problem.capacity
 
-		for item in solution:
-			wt = item.weight
-			geneticState = solution[item]
-			if geneticState == 1:
-				wt = item.weight
-				totalWeight += wt
-				print("chromosome-weight:", chromosome, "-", totalWeight)
-			max_score = abs(totalWeight - Weight)
-			# print("WT chromosome-exweight:", chromosome, "-", max_score)
+		takenItems = [item for item in problem.variables if solution[item] == 1 ]
+		Weight = problem.capacity
+		weight = 0
 
-			return max_score
+		# Check weight of items in knapsack
+		for item in takenItems:
+			weight += item.weight
+
+		excessWeight =  abs(Weight - weight)
+		
+		score = abs(max_score - excessWeight)
+		return score
+
 	else: 
 		# no violations
 		score = feasibility_minimum # min score for being valid solution
@@ -40,15 +42,15 @@ def knapsack_fitness(state,feasibility_minimum):
 		# INSERT CODE HERE
 		# Idea: higher total item value = higher score
 		# Hint: use item.value
+		takenItems = [item for item in problem.variables if solution[item] == 1 ]
+		itemValue = 0
 
-		for item in solution:
-			geneticState = solution[item]
-			if geneticState == 1:
-				val = item.value
-				score += val
-			print("VAL chromosome-score:", chromosome, "-", score)
+		for item in takenItems:
+			itemValue += item.value
 
-		return score
+		score = feasibility_minimum + itemValue
+		
+	return score
 
 def vertex_cover_fitness(state,feasibility_minimum):
 	# print("--------------------------The beginning of Vertex Cover!-----------------------------")
@@ -96,7 +98,6 @@ def vertex_cover_fitness(state,feasibility_minimum):
 		
 
 		# If the computed score is less than the assumed min score, return the computed score 
-		
 		score = feasibility_minimum + unused_vertices_length
 		
 
