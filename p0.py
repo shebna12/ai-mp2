@@ -32,7 +32,7 @@ def test3():
     # See check/p0.3.txt for correct answer
 
 def test4():
-    problem = knapsack.problem(test_case=0) # 0,1,2,3
+    problem = knapsack.problem(test_case=2) # 0,1,2,3
     problem.display()
 
     solver = brute_force_solver(problem)
@@ -45,7 +45,7 @@ def test4():
     # See check/p0.4.txt for correct answer
 
 def test5():
-    problem = vertex_cover.problem(test_case=10) # 0,1,2,3,4,5
+    problem = vertex_cover.problem(test_case=0) # 0,1,2,3,4,5
     problem.display()
 
     solver = brute_force_solver(problem)

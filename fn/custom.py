@@ -1,4 +1,5 @@
-import random 
+import random
+import itertools
 
 ### CUSTOM NEIGHBOR GENERATORS ###
 
@@ -36,7 +37,7 @@ def knapsack_neighbor_generator(state):
         # Hint: use constraint.test(solution)
         # Hint: check the pattern of maxone_neigbor_generator
         # Dont forget to update neighbor.changes
-        if constraint.test(solution):
+        if not constraint.test(solution):
             new_value = 0
             while True:
                 var = random.choice(problem.variables)
@@ -46,13 +47,18 @@ def knapsack_neighbor_generator(state):
             neighbor.solution[var] = new_value
             neighbor.changes = [(var, new_value)]
         else:
-            while True:
-                var1 = random.choice(problem.variables)
-                var2 = random.choice(problem.variables)
-                value1 = random.choice(problem.domain[var1])
-                value2 = random.choice(problem.domain[var2])
-                if (value1 != solution[var1] and value2 != solution[var2]) and (value2 != solution[var1] and value1 != solution[var2]):
-                    break
+            # while True:
+                # var_comb = list(itertools.combinations(problem.variables, 2))
+                # var1, var2 = random.choice(var_comb)
+                # value_prod = list(itertools.product(problem.domain[var1], problem.domain[var2]))
+                # value1, value2 = random.choice(value_prod)
+            var1 = random.choice(problem.variables)
+            var2 = random.choice(problem.variables)
+            value1 = random.choice(problem.domain[var1])
+            value2 = random.choice(problem.domain[var2])
+                # if not ((value2 == solution[var1] and value1 == solution[var2]) or (value1 == solution[var1] and value2 == solution[var2])):
+                # if (value2 != solution[var1] and value1 != solution[var2]) or (value1 != solution[var1] and value2 != solution[var2]):
+                #     break
             
             neighbor.solution[var1] = value1
             neighbor.solution[var2] = value2
